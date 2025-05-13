@@ -14,10 +14,10 @@ export class UserService {
  constructor(private http: HttpClient) { }
 
 
- addUser(user: User): Observable<any>{
-   const endpoint = `${this.api_url}/addUser`;
-   return this.http.post(endpoint, user);
- }
+ addUser(user: User): Observable<any> {
+  const endpoint = `${this.api_url}/addUser`;
+  return this.http.post(endpoint, user); // Remove the headers
+}
 
  getUsers(): Observable<User[]>{
    const endpoint = this.api_url;

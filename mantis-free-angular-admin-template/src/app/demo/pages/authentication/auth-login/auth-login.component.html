@@ -1,29 +1,52 @@
 <div class="auth-main">
   <div class="auth-wrapper v3">
     <div class="auth-form">
-      <div class="auth-header">
-        <a href="javascript:"><img src="assets/images/logo-dark.svg" alt="logo" /></a>
+      <div class="auth-header text-center">
+        <a href="javascript:">
+          <img src="assets/images/logo-dark.svg" alt="logo" class="mb-4" />
+        </a>
+        <h3 class="mb-0"><b>Welcome Back!</b></h3>
+        <p class="text-muted">Please login to your account</p>
       </div>
       <div class="card my-5">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-end mb-4">
-            <h3 class="mb-0"><b>Login</b></h3>
-            <a [routerLink]="['/register']" class="link-primary">Don't have an account?</a>
-          </div>
-          <form (ngSubmit)="login()">
+          <form [formGroup]="form" (ngSubmit)="login()">
             <div class="form-group mb-3">
-              <label class="form-label" for="email">Email Address</label>
-              <input type="email" class="form-control" id="email" placeholder="Email Address" [(ngModel)]="email" name="email" required />
+              <label class="form-label" for="uname">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="uname"
+                placeholder="Enter your username"
+                formControlName="uname"
+              />
+              <small *ngIf="f['uname'].touched && f['uname'].invalid" class="text-danger">
+                Username is required and must be at least 6 characters.
+              </small>
             </div>
             <div class="form-group mb-3">
               <label class="form-label" for="password">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Enter your password"
+                formControlName="password"
+              />
+              <small *ngIf="f['password'].touched && f['password'].invalid" class="text-danger">
+                Password is required.
+              </small>
             </div>
             <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary">Login</button>
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid">
+                Login
+              </button>
             </div>
           </form>
-          <p *ngIf="errorMessage" class="text-danger mt-3">{{ errorMessage }}</p>
+          <p *ngIf="errorMessage" class="text-danger mt-3 text-center">{{ errorMessage }}</p>
+          <div class="text-center mt-4">
+            <a [routerLink]="['/register']" class="link-primary">Don't have an account? Sign up</a>
+          </div>
         </div>
       </div>
     </div>

@@ -1,36 +1,44 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Import CommonModule for *ngIf
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-auth-login',
-  standalone: true,
-  imports: [FormsModule, RouterModule, CommonModule], // Import FormsModule and RouterModule
+  selector: 'app-side-login',
+  imports: [RouterModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './auth-login.component.html',
-  styleUrls: ['./auth-login.component.scss']
 })
 export class AuthLoginComponent {
-  email: string = '';
-  password: string = '';
+
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor( private router: Router, private authService: AuthService) {}
+
+  form = new FormGroup({
+    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    password: new FormControl('', [Validators.required]),
+  });
+
+  get f() {
+    return this.form.controls;
+  }
 
   login() {
-    this.authService.authenticate(this.email, this.password).subscribe({
-      next: (response) => {
-        // Save the token to localStorage
-        localStorage.setItem('AuthToken', response.token);
-        // Redirect to the dashboard or home page
-        this.router.navigate(['/dashboard']);
-      },
-      error: (error) => {
-        this.errorMessage = 'Invalid email or password';
-        console.error(error);
+    const { uname, password } = this.form.value;
+    this.authService.authenticate(uname || '', password || '').subscribe({
+      next:(res)=>{
+        localStorage.setItem("AuthToken", res.token);
+        this.router.navigate(['/']);
+      }, 
+      error:(err)=>{
+        console.log(err);
+        this.errorMessage = 'Error trying to login'; // Set the error message
       }
-    });
+
+    })
   }
 }
