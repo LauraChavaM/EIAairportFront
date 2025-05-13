@@ -1,27 +1,36 @@
-// project import
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common'; // Import CommonModule for *ngIf
 
 @Component({
   selector: 'app-auth-login',
-  imports: [RouterModule],
+  standalone: true,
+  imports: [FormsModule, RouterModule, CommonModule], // Import FormsModule and RouterModule
   templateUrl: './auth-login.component.html',
-  styleUrl: './auth-login.component.scss'
+  styleUrls: ['./auth-login.component.scss']
 })
 export class AuthLoginComponent {
-  // public method
-  SignInOptions = [
-    {
-      image: 'assets/images/authentication/google.svg',
-      name: 'Google'
-    },
-    {
-      image: 'assets/images/authentication/twitter.svg',
-      name: 'Twitter'
-    },
-    {
-      image: 'assets/images/authentication/facebook.svg',
-      name: 'Facebook'
-    }
-  ];
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  login() {
+    this.authService.authenticate(this.email, this.password).subscribe({
+      next: (response) => {
+        // Save the token to localStorage
+        localStorage.setItem('AuthToken', response.token);
+        // Redirect to the dashboard or home page
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        this.errorMessage = 'Invalid email or password';
+        console.error(error);
+      }
+    });
+  }
 }
