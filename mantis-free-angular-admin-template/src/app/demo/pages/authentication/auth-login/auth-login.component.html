@@ -1,21 +1,23 @@
-<div class="auth-main">
+<div class="auth-main d-flex align-items-center justify-content-center">
   <div class="auth-wrapper v3">
     <div class="auth-form">
       <div class="auth-header text-center">
         <a href="javascript:">
           <img src="assets/images/logo-dark.svg" alt="logo" class="mb-4" />
         </a>
-        <h3 class="mb-0"><b>Welcome Back!</b></h3>
-        <p class="text-muted">Please login to your account</p>
       </div>
-      <div class="card my-5">
-        <div class="card-body">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="mb-0"><b>Login</b></h3>
+            <a [routerLink]="['/register']" class="link-primary text-decoration-none">Don't have an account?</a>
+          </div>
           <form [formGroup]="form" (ngSubmit)="login()">
-            <div class="form-group mb-3">
-              <label class="form-label" for="uname">Username</label>
+            <div class="form-group mb-4">
+              <label class="form-label" for="uname">Username*</label>
               <input
                 type="text"
-                class="form-control"
+                class="form-control form-control-lg"
                 id="uname"
                 placeholder="Enter your username"
                 formControlName="uname"
@@ -24,11 +26,11 @@
                 Username is required and must be at least 6 characters.
               </small>
             </div>
-            <div class="form-group mb-3">
-              <label class="form-label" for="password">Password</label>
+            <div class="form-group mb-4">
+              <label class="form-label" for="password">Password*</label>
               <input
                 type="password"
-                class="form-control"
+                class="form-control form-control-lg"
                 id="password"
                 placeholder="Enter your password"
                 formControlName="password"
@@ -37,16 +39,20 @@
                 Password is required.
               </small>
             </div>
-            <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="customCheckc1" />
+                <label class="form-check-label text-muted" for="customCheckc1">Keep me signed in</label>
+              </div>
+              <a href="javascript:" class="text-secondary text-decoration-none">Forgot Password?</a>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid">
                 Login
               </button>
             </div>
           </form>
-          <p *ngIf="errorMessage" class="text-danger mt-3 text-center">{{ errorMessage }}</p>
-          <div class="text-center mt-4">
-            <a [routerLink]="['/register']" class="link-primary">Don't have an account? Sign up</a>
-          </div>
+          <p *ngIf="errorMessage" class="text-danger mt-4 text-center">{{ errorMessage }}</p>
         </div>
       </div>
     </div>
