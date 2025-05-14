@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class UserListComponent {
   userList: User[] = [];
+  isLoading: boolean = true; 
 
   constructor(private userService: UserService, private router: Router){
 
@@ -53,5 +54,20 @@ export class UserListComponent {
         }
       }
     )
+  }
+
+
+  getUsers(): void {
+    this.userService.getUsers().subscribe({
+      next: (data: User[]) => {
+        this.userList = data; // Assign fetched users to the array
+        this.isLoading = false; // Turn off loading state
+      },
+      error: (err) => {
+        console.error('Error fetching users:', err);
+        this.isLoading = false; // Turn off loading state even on error
+      },
+    });
+
   }
 }
