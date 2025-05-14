@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Contact</th>
+        <th>Flight Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of personnel">
+        <td>{{ person.personnel_id }}</td>
+        <td>{{ person.name }}</td>
+        <td>{{ person.role }}</td>
+        <td>{{ person.contact }}</td>
+        <td>{{ person.flight_number }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
