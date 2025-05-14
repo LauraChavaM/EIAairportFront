@@ -36,6 +36,11 @@ export const routes: Routes = [
     component: GuestLayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: '/dashboard/default',
+        pathMatch: 'full'
+      },
+      {
         path: 'login',
         loadComponent: () => import('./demo/pages/authentication/auth-login/auth-login.component').then((c) => c.AuthLoginComponent)
       },
