@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user.model';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AlertService } from 'src/app/services/alert.service'; // Import AlertService for notifications
+import { AlertService } from 'src/app/services/alert/alert.service'; // Import AlertService for notifications
 
 @Component({
   selector: 'app-auth-register',
