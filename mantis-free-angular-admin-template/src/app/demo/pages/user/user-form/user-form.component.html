@@ -1,0 +1,48 @@
+<div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Edit User</h5>
+      <button class="btn btn-primary" (click)="saveUserInfo()">Save</button>
+    </div>
+    <div class="card-body border-top">
+      <form [formGroup]="form">
+        <div class="row">
+          <!-- Name Field -->
+          <div class="col-lg-6 mb-3">
+            <label for="name" class="form-label fw-bold">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              placeholder="User's name"
+              formControlName="name"
+            />
+          </div>
+  
+          <!-- Email Field -->
+          <div class="col-lg-6 mb-3">
+            <label for="email" class="form-label fw-bold">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="Email address"
+              formControlName="email"
+            />
+          </div>
+  
+          <!-- Status Field (Visible only in Edit Mode) -->
+          <div class="col-lg-6 mb-3" *ngIf="editMode">
+            <label for="status" class="form-label fw-bold">Status</label>
+            <select
+              id="status"
+              class="form-select"
+              formControlName="status"
+            >
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

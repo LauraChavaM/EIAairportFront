@@ -1,63 +1,58 @@
-<div class="auth-main">
+<div class="auth-main d-flex align-items-center justify-content-center">
   <div class="auth-wrapper v3">
     <div class="auth-form">
-      <div class="auth-header">
-        <a href="javascript:"><img src="assets/images/logo-dark.svg" alt="logo" /></a>
+      <div class="auth-header text-center">
+        <a href="javascript:">
+          <img src="assets/images/logo-dark.svg" alt="logo" class="mb-4" />
+        </a>
       </div>
-      <div class="card my-5">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-end mb-4">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+          <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="mb-0"><b>Login</b></h3>
-            <a [routerLink]="['/register']" class="link-primary">Don't have an account?</a>
+            <a [routerLink]="['/register']" class="link-primary text-decoration-none">Don't have an account?</a>
           </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email Address" value="info@codedthemes.com" />
-          </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" value="123456789" />
-          </div>
-          <div class="d-flex mt-1 justify-content-between">
-            <div class="form-check">
-              <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-              <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+          <form [formGroup]="form" (ngSubmit)="login()">
+            <div class="form-group mb-4">
+              <label class="form-label" for="uname">Username*</label>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="uname"
+                placeholder="Enter your username"
+                formControlName="uname"
+              />
+              <small *ngIf="f['uname'].touched && f['uname'].invalid" class="text-danger">
+                Username is required and must be at least 6 characters.
+              </small>
             </div>
-            <h5 class="text-secondary f-w-400"><a href="javascript:">Forgot Password?</a></h5>
-          </div>
-          <div class="d-grid mt-4">
-            <button type="button" class="btn btn-primary">Login</button>
-          </div>
-          <div class="saprator mt-3">
-            <span>Login with</span>
-          </div>
-          <div class="row">
-            @for (item of SignInOptions; track item) {
-              <div class="col-4">
-                <div class="d-grid">
-                  <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                    <img src="{{ item.image }}" alt="google img" />
-                    <span class="d-none d-sm-inline-block">{{ item.name }}</span>
-                  </button>
-                </div>
+            <div class="form-group mb-4">
+              <label class="form-label" for="password">Password*</label>
+              <input
+                type="password"
+                class="form-control form-control-lg"
+                id="password"
+                placeholder="Enter your password"
+                formControlName="password"
+              />
+              <small *ngIf="f['password'].touched && f['password'].invalid" class="text-danger">
+                Password is required.
+              </small>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="customCheckc1" />
+                <label class="form-check-label text-muted" for="customCheckc1">Keep me signed in</label>
               </div>
-            }
-          </div>
-        </div>
-      </div>
-      <div class="auth-footer row">
-        <div class="col my-1">
-          <p class="m-0">
-            Copyright ©
-            <a href="https://codedthemes.com/" target="_blank">CodedThemes</a>
-          </p>
-        </div>
-        <div class="col-auto my-1">
-          <ul class="list-inline footer-link mb-0">
-            <li class="list-inline-item"><a href="https://codedthemes.com/" target="_blank">Home</a></li>
-            <li class="list-inline-item"><a href="https://codedthemes.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
-            <li class="list-inline-item"><a href="https://codedthemes.support-hub.io/" target="_blank">Contact us</a></li>
-          </ul>
+              <a href="javascript:" class="text-secondary text-decoration-none">Forgot Password?</a>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid">
+                Login
+              </button>
+            </div>
+          </form>
+          <p *ngIf="errorMessage" class="text-danger mt-4 text-center">{{ errorMessage }}</p>
         </div>
       </div>
     </div>
