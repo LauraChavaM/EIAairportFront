@@ -1,6 +1,9 @@
 // angular import
 import { Component, inject, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert/alert.service';
+
 
 // project import
 
@@ -45,7 +48,10 @@ export class NavRightComponent {
   username: string = ''; // Add a property to hold the username
 
 
-  constructor() {
+  constructor(
+    private alertService: AlertService, // Inject AlertService
+    private router: Router  
+  ) {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
       ...[
@@ -111,6 +117,15 @@ export class NavRightComponent {
       title: 'History'
     }
   ];
+
+  logOut(){
+    this.alertService.AlertConfirmation("Caution", "Are you sure that you want to logout?").then((objAlert) =>{
+      if(objAlert.isConfirmed){
+        localStorage.removeItem('AuthToken');
+        this.router.navigate(['/login'])
+      }
+    })
+  }
 
   ngOnInit(): void {
     // Fetch the username from local storage or an authentication service
