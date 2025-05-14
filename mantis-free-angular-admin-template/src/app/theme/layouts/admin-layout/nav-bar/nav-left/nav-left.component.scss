@@ -1,0 +1,29 @@
+/* filepath: c:\Users\laura\ing web vsc\Angular\EIAairportFront\mantis-free-angular-admin-template\src\app\theme\layouts\admin-layout\nav-bar\nav-left\nav-left.component.scss */
+.sidebar {
+    background-color: #f8f9fa;
+    height: 100vh;
+    padding: 1rem;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+  
+    &:hover {
+      background-color: #e9ecef;
+      color: #007bff;
+    }
+  
+    &.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+  
+    i {
+      margin-right: 0.5rem;
+    }
+  }

@@ -42,6 +42,9 @@ export class NavRightComponent {
   windowWidth: number;
   screenFull: boolean = true;
 
+  username: string = ''; // Add a property to hold the username
+
+
   constructor() {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
@@ -108,4 +111,10 @@ export class NavRightComponent {
       title: 'History'
     }
   ];
+
+  ngOnInit(): void {
+    // Fetch the username from local storage or an authentication service
+    this.username = localStorage.getItem('username') || 'Guest'; // Default to 'Guest' if no username is found
+  }
+
 }

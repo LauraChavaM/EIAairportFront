@@ -1,0 +1,22 @@
+/* filepath: c:\Users\laura\ing web vsc\Angular\EIAairportFront\mantis-free-angular-admin-template\src\app\demo\component\starting-page\starting-page\starting-page.component.scss */
+.container {
+    margin-top: 20px;
+  }
+  
+  .card {
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 0.95rem;
+  }

@@ -10,7 +10,7 @@ import { MenuUnfoldOutline, MenuFoldOutline, SearchOutline } from '@ant-design/i
 
 @Component({
   selector: 'app-nav-left',
-  imports: [IconDirective, CommonModule],
+  imports: [CommonModule],
   templateUrl: './nav-left.component.html',
   styleUrls: ['./nav-left.component.scss']
 })
