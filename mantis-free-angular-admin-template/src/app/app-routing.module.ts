@@ -23,6 +23,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/component/flights/flights/flights.component').then((c) => c.FlightsComponent),
       },
+      
 
 
 
