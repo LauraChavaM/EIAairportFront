@@ -2,31 +2,38 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.component';
 import { GuestLayoutComponent } from './theme/layouts/guest-layout/guest-layout.component';
-import { StartingPageComponent } from './demo/component/starting-page/starting-page/starting-page.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
     children: [
-      {
-        path: '',
-        component: StartingPageComponent, // Set StartingPageComponent as the default route
-      },
+      
       {
         path: 'dashboard/default',
         loadComponent: () =>
           import('./demo/dashboard/default/default.component').then((c) => c.DefaultComponent),
       },
       {
-        path: 'flights',
-        loadComponent: () =>
-          import('./demo/component/flights/flights/flights.component').then((c) => c.FlightsComponent),
+        path:'users',
+        loadChildren: ()=>
+          import('./demo/pages/user/user.routes').then((c) => c.UserRoutes)
       },
-      
-
-
-
+      // { 
+      //   path: 'flights',
+      //   loadComponent: () =>
+      //     import('./demo/pages/flights/flights.routes').then((c) => c.FlightRoutes)
+      // },
+      // {
+      //   path: 'personnel',
+      //   loadComponent: () =>
+      //     import('./demo/pages/personnel/personnel.routes').then((c) => c.PersonnelRoutes)
+      // }
+      {
+        path: 'services',
+        loadChildren: () =>
+          import('./demo/pages/services/services.routes').then((c) => c.ServicesRoutes)
+      }
     ],
   },
   {
@@ -45,6 +52,7 @@ export const routes: Routes = [
       },
     ],
   },
+  
   // Catch-all route for undefined paths
   {
     path: '**',
