@@ -23,7 +23,7 @@ export class AlertService {
       title:title,
       text: text,
       showCancelButton: true,
-      confirmButtonText: "Please Try Again",
+      confirmButtonText: "Confirm",
       cancelButtonText:"Cancel"
     })
   }
