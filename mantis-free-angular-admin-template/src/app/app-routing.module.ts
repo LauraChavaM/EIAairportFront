@@ -19,16 +19,16 @@ export const routes: Routes = [
         loadChildren: ()=>
           import('./demo/pages/user/user.routes').then((c) => c.UserRoutes)
       },
-      // { 
-      //   path: 'flights',
-      //   loadComponent: () =>
-      //     import('./demo/pages/flights/flights.routes').then((c) => c.FlightRoutes)
-      // },
-      // {
-      //   path: 'personnel',
-      //   loadComponent: () =>
-      //     import('./demo/pages/personnel/personnel.routes').then((c) => c.PersonnelRoutes)
-      // }
+      { 
+        path: 'flights',
+        loadChildren: () =>
+          import('./demo/pages/flights/flights.routes').then((c) => c.FlightRoutes)
+      },
+      {
+        path: 'personnel',
+        loadChildren: () =>
+          import('./demo/pages/personnel/personnel.routes').then((c) => c.PersonnelRoutes)
+      },
       {
         path: 'services',
         loadChildren: () =>

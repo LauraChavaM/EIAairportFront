@@ -5,9 +5,6 @@
                 <h5 class="card-title mb-0">Users</h5>
                 <p class="card-subtitle text-muted">List</p>
             </div>
-            <div>
-                <button class="btn btn-primary">Create new user</button>
-            </div>
         </div>
         <hr>
         <div class="table-responsive">
@@ -18,7 +15,6 @@
                         <th class="fw-bold">Name</th>
                         <th class="fw-bold">Email</th>
                         <th class="fw-bold">Status</th>
-                        <th class="fw-bold">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,30 +29,6 @@
                             <span *ngIf="user.status === 'Inactive'" class="badge bg-warning text-dark">
                                 {{ user.status }}
                             </span>
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Actions
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0)"
-                                            (click)="goToUserForm(user.id)">
-                                            <i class="bi bi-pencil"></i> Edit
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0)"
-                                            (click)="changeUserStatus(user)">
-                                            <i class="bi bi-toggle-on"></i>
-                                            <span *ngIf="user.status === 'Active'">Desactivate</span>
-                                            <span *ngIf="user.status === 'Inactive'">Activate</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </td>
                     </tr>
                 </tbody>

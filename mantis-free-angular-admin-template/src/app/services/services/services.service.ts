@@ -12,11 +12,31 @@ export class ServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Service[]> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('AuthToken');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
+  }
+
+  getAllServices(): Observable<Service[]> {
+    const headers = this.getAuthHeaders();
     return this.http.get<Service[]>(this.apiUrl, { headers });
+  }
+
+  addService(service: Service): Observable<Service> {
+    const headers = this.getAuthHeaders();
+    return this.http.post<Service>(`${this.apiUrl}/create`, service, { headers });
+  }
+
+  updateService(id: string, serviceData: Partial<Service>): Observable<Service> {
+    const headers = this.getAuthHeaders();
+    return this.http.put<Service>(`${this.apiUrl}/${id}`, serviceData, { headers });
+  }
+
+  deleteService(id: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
   }
 }
