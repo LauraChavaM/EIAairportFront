@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Personnel } from 'src/app/models/personnel.model';
+import { Passenger } from 'src/app/models/passengers.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class PersonnelService {
+export class PassengerService {
+
   private apiUrl = 'http://localhost:3000/api/personnel';
 
   constructor(private http: HttpClient) {}
@@ -18,23 +19,20 @@ export class PersonnelService {
     });
   }
 
-  getAllPersonnel(): Observable<Personnel[]> {
+  getAllPassengers(): Observable<Passenger[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<Personnel[]>(this.apiUrl, { headers });
+    return this.http.get<Passenger[]>(this.apiUrl, { headers });
   }
 
-  
-  addPersonnel(personnel: Personnel): Observable<Personnel> {
+  addPassenger(passenger: Passenger): Observable<Passenger> {
     const endpoint = `${this.apiUrl}/create`;
     const headers = this.getAuthHeaders();
-    return this.http.post<Personnel>(endpoint, personnel, { headers });
+    return this.http.post<Passenger>(endpoint, passenger, { headers });
   }
 
-  updatePersonnel(id: string, personnelData: Partial<Personnel>): Observable<Personnel> {
+  updatePassenger(id: string, passengerData: Partial<Passenger>): Observable<Passenger> {
     const endpoint = `${this.apiUrl}/${id}`;
     const headers = this.getAuthHeaders();
-    return this.http.post<Personnel>(endpoint, personnelData, { headers });
+    return this.http.post<Passenger>(endpoint, passengerData, { headers });
   }
-
-  
 }

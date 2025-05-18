@@ -40,7 +40,7 @@ export class FlightService {
   updateFlight(id: string, flightData: Partial<Flight>): Observable<Flight> {
     const endpoint = `${this.api_url}/${id}`;
     const headers = this.getAuthHeaders();
-    return this.http.put<Flight>(endpoint, flightData, { headers });
+    return this.http.post<Flight>(endpoint, flightData, { headers });
   }
 
   changeFlightStatus(id: string, status: string): Observable<any> {
