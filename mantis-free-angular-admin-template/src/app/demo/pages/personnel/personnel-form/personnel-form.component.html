@@ -1,1 +1,26 @@
-<p>personnel-form works!</p>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">{{ isEditMode ? 'Update Personnel' : 'Add Personnel' }}</h5>
+    <form [formGroup]="personnelForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input class="form-control" formControlName="name" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Role</label>
+        <input class="form-control" formControlName="role" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Contact</label>
+        <input class="form-control" formControlName="contact" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Flight Number</label>
+        <input class="form-control" formControlName="flight_number" />
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="personnelForm.invalid">
+        {{ isEditMode ? 'Update' : 'Create' }}
+      </button>
+    </form>
+  </div>
+</div>

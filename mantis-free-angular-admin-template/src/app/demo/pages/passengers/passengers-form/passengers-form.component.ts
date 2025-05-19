@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PassengerService } from 'src/app/services/passenger/passenger.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-passengers-form',
   templateUrl: './passengers-form.component.html',
   styleUrls: ['./passengers-form.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [ReactiveFormsModule, CommonModule]
 })
 export class PassengersFormComponent implements OnInit {
   passengerForm!: FormGroup;
@@ -27,9 +26,7 @@ export class PassengersFormComponent implements OnInit {
   ngOnInit(): void {
     this.passengerForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      passportNumber: ['', Validators.required],
-      status: ['', Validators.required]
+      contact: ['', Validators.required]
     });
 
     this.passengerId = this.route.snapshot.paramMap.get('id');

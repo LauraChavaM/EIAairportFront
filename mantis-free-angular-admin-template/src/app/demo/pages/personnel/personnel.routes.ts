@@ -18,6 +18,10 @@ export const PersonnelRoutes: Routes = [{
         {
             path:'form',
             component: PersonnelFormComponent
+        },
+        {
+            path: 'form/:id',
+            component: PersonnelFormComponent
         }
     ], canActivate: [authGuard]
 }]

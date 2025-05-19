@@ -1,11 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { PersonnelService } from 'src/app/services/personnel/personnel.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-personnel-form',
-  imports: [],
   templateUrl: './personnel-form.component.html',
-  styleUrl: './personnel-form.component.scss'
+  styleUrls: ['./personnel-form.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule]
 })
-export class PersonnelFormComponent {
+export class PersonnelFormComponent implements OnInit {
+  personnelForm!: FormGroup;
+  isEditMode = false;
+  personnelId: string | null = null;
 
+  constructor(
+    private fb: FormBuilder,
+    private personnelService: PersonnelService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.personnelForm = this.fb.group({
+      name: ['', Validators.required],
+      role: ['', Validators.required],
+      contact: ['', Validators.required],
+      flight_number: ['']
+    });
+
+    this.personnelId = this.route.snapshot.paramMap.get('id');
+    if (this.personnelId) {
+      this.isEditMode = true;
+      this.personnelService.getPersonnelById(this.personnelId).subscribe(person => {
+        this.personnelForm.patchValue(person);
+      });
+    }
+  }
+
+  onSubmit() {
+    if (this.personnelForm.invalid) return;
+
+    if (this.isEditMode && this.personnelId) {
+      this.personnelService.updatePersonnel(this.personnelId, this.personnelForm.value).subscribe(() => {
+        this.router.navigate(['/personnel/list']);
+      });
+    } else {
+      this.personnelService.addPersonnel(this.personnelForm.value).subscribe(() => {
+        this.router.navigate(['/personnel/list']);
+      });
+    }
+  }
 }

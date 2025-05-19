@@ -59,10 +59,10 @@ export const routes: Routes = [
   },
   
   // Catch-all route for undefined paths
-  {
-    path: '**',
-    redirectTo: '', // Redirect undefined paths to the starting page
-  },
+  // {
+  //   path: '**',
+  //   redirectTo: '', // Redirect undefined paths to the starting page
+  // },
 ];
 
 @NgModule({
