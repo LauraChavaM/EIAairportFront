@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -6,17 +6,20 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-side-login',
   imports: [RouterModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './auth-login.component.html',
+  standalone: true,
 })
 export class AuthLoginComponent {
 
-  errorMessage: string = '';
-
-  constructor(private router: Router, private authService: AuthService) { }
+  loginForm!: FormGroup;
+  errorMessage: string | null = null;
+  
+  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) { }
 
   form = new FormGroup({
     uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -27,6 +30,8 @@ export class AuthLoginComponent {
     return this.form.controls;
   }
 
+
+ 
   login() {
     const { uname, password } = this.form.value;
     this.authService.authenticate(uname || '', password || '').subscribe({
