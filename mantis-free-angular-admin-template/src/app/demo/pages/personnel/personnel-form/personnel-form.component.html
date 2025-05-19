@@ -17,6 +17,7 @@
       <div class="mb-3">
         <label class="form-label">Flight Number</label>
         <input class="form-control" formControlName="flight_number" />
+        <div *ngIf="flightNumberError" class="text-danger mt-1">{{ flightNumberError }}</div>
       </div>
       <button class="btn btn-primary" type="submit" [disabled]="personnelForm.invalid">
         {{ isEditMode ? 'Update' : 'Create' }}

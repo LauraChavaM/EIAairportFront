@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Flight } from 'src/app/models/flights.model';
+import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -49,4 +51,14 @@ export class FlightService {
     const body = { status };
     return this.http.post(endpoint, body, { headers });
   }
+
+
+  flightExists(flight_number: string): Observable<boolean> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<any>(`${this.api_url}/${flight_number}`, { headers }).pipe(
+    map(() => true),
+    catchError(() => of(false))
+  );
+}
+
 }

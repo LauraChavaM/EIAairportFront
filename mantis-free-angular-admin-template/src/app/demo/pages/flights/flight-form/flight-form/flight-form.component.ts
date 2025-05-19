@@ -16,6 +16,7 @@ export class FlightFormComponent implements OnInit {
   flightForm!: FormGroup;
   isEditMode = false;
   flightId: string | null = null;
+  timeError: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -48,16 +49,33 @@ export class FlightFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.flightForm.invalid) return;
+  if (this.flightForm.invalid) return;
 
-    if (this.isEditMode && this.flightId) {
-      this.flightService.updateFlight(this.flightId, this.flightForm.value).subscribe(() => {
-        this.router.navigate(['/flights/list']);
-      });
-    } else {
-      this.flightService.createFlight(this.flightForm.value).subscribe(() => {
-        this.router.navigate(['/flights/list']);
-      });
-    }
+  const departure = new Date(this.flightForm.get('departure_time')?.value);
+  const arrival = new Date(this.flightForm.get('arrival_time')?.value);
+
+  const diffMs = arrival.getTime() - departure.getTime();
+  const diffMinutes = diffMs / (1000 * 60);
+  const diffHours = diffMinutes / 60;
+
+  if (diffMinutes < 30) {
+    this.timeError = 'Please select a valid time range for departure and arrival time.';
+    return;
+  } else if (diffHours > 24) {
+    this.timeError = 'Please select a valid time range for departure and arrival time.';
+    return;
+  } else {
+    this.timeError = null;
   }
+
+  if (this.isEditMode && this.flightId) {
+    this.flightService.updateFlight(this.flightId, this.flightForm.value).subscribe(() => {
+      this.router.navigate(['/flights/list']);
+    });
+  } else {
+    this.flightService.createFlight(this.flightForm.value).subscribe(() => {
+      this.router.navigate(['/flights/list']);
+    });
+  }
+}
 }

@@ -1,1 +1,33 @@
-<p>services-list works!</p>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="card-title mb-0">Services</h5>
+      <button class="btn btn-primary" (click)="goToAdd()">Add Service</button>
+    </div>
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <div class="table-responsive" *ngIf="!isLoading">
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of services">
+            <td>{{ service.name }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.location }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary" (click)="goToUpdate(service.service_id)">Update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

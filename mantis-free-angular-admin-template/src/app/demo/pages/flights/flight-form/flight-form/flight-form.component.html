@@ -43,6 +43,8 @@
           <option value="Cancelled">Cancelled</option>
         </select>
       </div>
+      <!-- Show time validation error if present -->
+      <div *ngIf="timeError" class="text-danger mb-2">{{ timeError }}</div>
       <button class="btn btn-primary" type="submit" [disabled]="flightForm.invalid">
         {{ isEditMode ? 'Update' : 'Create' }}
       </button>
