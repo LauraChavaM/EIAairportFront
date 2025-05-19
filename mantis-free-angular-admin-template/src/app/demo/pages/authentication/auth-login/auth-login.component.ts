@@ -22,7 +22,7 @@ export class AuthLoginComponent {
   constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) { }
 
   form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    uname: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
 
@@ -36,7 +36,9 @@ export class AuthLoginComponent {
     const { uname, password } = this.form.value;
     this.authService.authenticate(uname || '', password || '').subscribe({
       next: (res) => {
+        console.log(res);
         localStorage.setItem("AuthToken", res.token);
+        localStorage.setItem('username', uname || 'Guesttt');
         this.router.navigate(['/flights']);
       },
       error: (err) => {

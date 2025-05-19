@@ -111,8 +111,10 @@
     <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
       <div class="dropdown-header">
         <div class="d-flex mb-1">
-          <div class="flex-shrink-0">
-            <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar wid-35" />
+          <div class="flex-shrink-0 d-flex align-items-center gap-2 py-2 px-1">
+            <img src="assets/images/user/avatar-2.jpg" alt="user-image"
+              class="user-avatar wid-35 rounded-circle border border-2 border-primary" />
+            <span class="f-w-600 text-dark" style="font-size: 1rem;">{{ username }}</span>
           </div>
           <!-- <div class="flex-grow-1 ms-3 text-start">
             <h6 class="mb-0">JWT User</h6>
