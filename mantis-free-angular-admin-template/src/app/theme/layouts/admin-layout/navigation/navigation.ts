@@ -20,23 +20,6 @@ export interface NavigationItem {
 
 export const NavigationItems: NavigationItem[] = [
   {
-    id: 'dashboard',
-    title: 'Dashboard',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'default',
-        title: 'Default',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard/default',
-        icon: 'dashboard',
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
     id: 'authentication',
     title: 'Authentication',
     type: 'group',
@@ -76,7 +59,7 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/flights',
-        icon: 'send',
+        icon: 'ant-design', 
         breadcrumbs: false
       },
       {
@@ -94,7 +77,7 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/personnel',
-        icon: 'team',
+        icon: 'ant-design', 
         breadcrumbs: false
       },
       {
@@ -103,7 +86,7 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/passengers',
-        icon: 'usergroup-add',
+        icon: 'user', 
         breadcrumbs: false
       },
       {
@@ -112,7 +95,7 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/services',
-        icon: 'appstore',
+        icon: 'ant-design', 
         breadcrumbs: false
       }
     ]

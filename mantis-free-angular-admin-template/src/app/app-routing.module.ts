@@ -8,18 +8,22 @@ export const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'flights'
+      },
       {
         path: 'dashboard/default',
         loadComponent: () =>
           import('./demo/dashboard/default/default.component').then((c) => c.DefaultComponent),
       },
       {
-        path:'users',
-        loadChildren: ()=>
+        path: 'users',
+        loadChildren: () =>
           import('./demo/pages/user/user.routes').then((c) => c.UserRoutes)
       },
-      { 
+      {
         path: 'flights',
         loadChildren: () =>
           import('./demo/pages/flights/flights.routes').then((c) => c.FlightRoutes)
@@ -57,7 +61,7 @@ export const routes: Routes = [
       },
     ],
   },
-  
+
   // Catch-all route for undefined paths
   // {
   //   path: '**',
@@ -69,4 +73,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
