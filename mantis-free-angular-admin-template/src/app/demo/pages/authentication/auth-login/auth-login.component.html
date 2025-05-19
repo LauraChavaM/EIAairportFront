@@ -3,7 +3,7 @@
     <div class="auth-form">
       <div class="auth-header text-center">
         <a href="javascript:">
-          <img src="assets/images/logo-dark.svg" alt="logo" class="mb-4" />
+          <img src="assets/images/AirportLogo.png"  style="width: 15%;" alt="logo" class="mb-4" />
         </a>
       </div>
       <div class="card shadow-lg border-0">
@@ -14,16 +14,16 @@
           </div>
           <form [formGroup]="form" (ngSubmit)="login()">
             <div class="form-group mb-4">
-              <label class="form-label" for="uname">Username*</label>
+              <label class="form-label" for="uname">Email*</label>
               <input
                 type="text"
                 class="form-control form-control-lg"
                 id="uname"
-                placeholder="Enter your username"
+                placeholder="Enter your email"
                 formControlName="uname"
               />
               <small *ngIf="f['uname'].touched && f['uname'].invalid" class="text-danger">
-                Username is required and must be at least 6 characters.
+                A valid email is required.
               </small>
             </div>
             <div class="form-group mb-4">
@@ -38,13 +38,6 @@
               <small *ngIf="f['password'].touched && f['password'].invalid" class="text-danger">
                 Password is required.
               </small>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="customCheckc1" />
-                <label class="form-check-label text-muted" for="customCheckc1">Keep me signed in</label>
-              </div>
-              <a href="javascript:" class="text-secondary text-decoration-none">Forgot Password?</a>
             </div>
             <div class="d-grid">
               <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid">

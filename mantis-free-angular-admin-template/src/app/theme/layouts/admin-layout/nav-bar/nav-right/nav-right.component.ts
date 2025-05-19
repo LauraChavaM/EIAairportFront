@@ -1,4 +1,4 @@
-// angular import
+import { OnInit } from '@angular/core';
 import { Component, inject, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
@@ -37,7 +37,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
   templateUrl: './nav-right.component.html',
   styleUrls: ['./nav-right.component.scss']
 })
-export class NavRightComponent {
+export class NavRightComponent implements OnInit{
+
   private iconService = inject(IconService);
 
   styleSelectorToggle = input<boolean>();
