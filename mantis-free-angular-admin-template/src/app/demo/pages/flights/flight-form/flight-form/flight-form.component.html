@@ -1,1 +1,53 @@
-<p>flight-form works!</p>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">{{ isEditMode ? 'Update Flight' : 'Add Flight' }}</h5>
+    <form [formGroup]="flightForm" (ngSubmit)="onSubmit()">
+      <!-- Flight Number field removed since it is generated automatically -->
+      <div *ngIf="isEditMode" class="mb-3">
+        <label class="form-label">Flight Number</label>
+        <input class="form-control" [value]="flightForm.get('flight_number')?.value" disabled />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Airline</label>
+        <input class="form-control" formControlName="airline" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Origin</label>
+        <input class="form-control" formControlName="origin" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Destination</label>
+        <input class="form-control" formControlName="destination" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Departure Time</label>
+        <input type="datetime-local" class="form-control" formControlName="departure_time" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Arrival Time</label>
+        <input type="datetime-local" class="form-control" formControlName="arrival_time" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Departure Gate</label>
+        <input class="form-control" formControlName="departure_gate" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Arrival Gate</label>
+        <input class="form-control" formControlName="arrival_gate" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select class="form-select" formControlName="status">
+          <option value="On Time">On Time</option>
+          <option value="Delayed">Delayed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+      <!-- Show time validation error if present -->
+      <div *ngIf="timeError" class="text-danger mb-2">{{ timeError }}</div>
+      <button class="btn btn-primary" type="submit" [disabled]="flightForm.invalid">
+        {{ isEditMode ? 'Update' : 'Create' }}
+      </button>
+    </form>
+  </div>
+</div>

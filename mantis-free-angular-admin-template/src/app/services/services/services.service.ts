@@ -27,12 +27,12 @@ export class ServiceService {
 
   addService(service: Service): Observable<Service> {
     const headers = this.getAuthHeaders();
-    return this.http.post<Service>(`${this.apiUrl}/create`, service, { headers });
+    return this.http.post<Service>(`${this.apiUrl}`, service, { headers });
   }
 
   updateService(id: string, serviceData: Partial<Service>): Observable<Service> {
     const headers = this.getAuthHeaders();
-    return this.http.put<Service>(`${this.apiUrl}/${id}`, serviceData, { headers });
+    return this.http.post<Service>(`${this.apiUrl}/${id}`, serviceData, { headers });
   }
 
   deleteService(id: string): Observable<any> {
