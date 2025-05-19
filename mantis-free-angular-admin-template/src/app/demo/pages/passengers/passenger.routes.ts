@@ -7,6 +7,11 @@ export const PassengersRoutes: Routes = [{
     path:'',
     children: [
         {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'list'
+        },
+        {
             path:'list',
             component: PassengersListComponent
         },

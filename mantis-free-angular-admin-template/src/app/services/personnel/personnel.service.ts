@@ -25,7 +25,7 @@ export class PersonnelService {
 
   
   addPersonnel(personnel: Personnel): Observable<Personnel> {
-    const endpoint = `${this.apiUrl}/create`;
+    const endpoint = `${this.apiUrl}`;
     const headers = this.getAuthHeaders();
     return this.http.post<Personnel>(endpoint, personnel, { headers });
   }

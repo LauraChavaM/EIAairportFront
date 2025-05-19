@@ -32,7 +32,7 @@ export class FlightService {
   }
 
   createFlight(flight: Flight): Observable<Flight> {
-    const endpoint = `${this.api_url}/create`;
+    const endpoint = `${this.api_url}`;
     const headers = this.getAuthHeaders();
     return this.http.post<Flight>(endpoint, flight, { headers });
   }

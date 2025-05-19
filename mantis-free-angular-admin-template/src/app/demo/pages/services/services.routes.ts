@@ -7,6 +7,11 @@ export const ServicesRoutes: Routes = [{
     path:'',
     children: [
         {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'list'
+        },
+        {
             path:'list',
             component: ServicesListComponent
         },

@@ -7,12 +7,21 @@ export const FlightRoutes: Routes = [{
     path:'',
     children: [
         {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'list'
+        },
+        {
             path:'list',
             component: FlightListComponent
         },
         {
             path:'form',
             component: FlightFormComponent
-        }
+        },
+        {
+        path: 'form/:id',
+        component: FlightFormComponent
+      }
     ], canActivate: [authGuard]
 }]
