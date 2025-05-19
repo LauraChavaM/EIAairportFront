@@ -23,9 +23,14 @@ export class PersonnelService {
     return this.http.get<Personnel[]>(this.apiUrl, { headers });
   }
 
-  
+  getPersonnelById(id: string): Observable<Personnel> {
+    const endpoint = `${this.apiUrl}/${id}`;
+    const headers = this.getAuthHeaders();
+    return this.http.get<Personnel>(endpoint, { headers });
+  }
+
   addPersonnel(personnel: Personnel): Observable<Personnel> {
-    const endpoint = `${this.apiUrl}/create`;
+    const endpoint = `${this.apiUrl}`;
     const headers = this.getAuthHeaders();
     return this.http.post<Personnel>(endpoint, personnel, { headers });
   }

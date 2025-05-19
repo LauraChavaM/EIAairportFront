@@ -30,6 +30,11 @@ export const routes: Routes = [
           import('./demo/pages/personnel/personnel.routes').then((c) => c.PersonnelRoutes)
       },
       {
+        path: 'passengers',
+        loadChildren: () =>
+          import('./demo/pages/passengers/passenger.routes').then((c) => c.PassengersRoutes)
+      },
+      {
         path: 'services',
         loadChildren: () =>
           import('./demo/pages/services/services.routes').then((c) => c.ServicesRoutes)
@@ -54,10 +59,10 @@ export const routes: Routes = [
   },
   
   // Catch-all route for undefined paths
-  {
-    path: '**',
-    redirectTo: '', // Redirect undefined paths to the starting page
-  },
+  // {
+  //   path: '**',
+  //   redirectTo: '', // Redirect undefined paths to the starting page
+  // },
 ];
 
 @NgModule({

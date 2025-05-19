@@ -89,6 +89,24 @@ export const NavigationItems: NavigationItem[] = [
         breadcrumbs: false
       },
       {
+        id: 'personnel',
+        title: 'Personnel',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/personnel',
+        icon: 'team',
+        breadcrumbs: false
+      },
+      {
+        id: 'passengers',
+        title: 'Passengers',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/passengers',
+        icon: 'usergroup-add',
+        breadcrumbs: false
+      },
+      {
         id: 'services',
         title: 'Services',
         type: 'item',

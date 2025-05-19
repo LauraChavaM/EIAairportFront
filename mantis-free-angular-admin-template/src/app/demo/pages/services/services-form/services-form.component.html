@@ -1,1 +1,22 @@
-<p>services-form works!</p>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">{{ isEditMode ? 'Update Service' : 'Add Service' }}</h5>
+    <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input class="form-control" formControlName="name" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input class="form-control" formControlName="description" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input class="form-control" formControlName="location" />
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="serviceForm.invalid">
+        {{ isEditMode ? 'Update' : 'Create' }}
+      </button>
+    </form>
+  </div>
+</div>

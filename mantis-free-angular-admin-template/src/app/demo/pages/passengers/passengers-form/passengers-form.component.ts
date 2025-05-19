@@ -1,11 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { PassengerService } from 'src/app/services/passenger/passenger.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-passengers-form',
-  imports: [],
   templateUrl: './passengers-form.component.html',
-  styleUrl: './passengers-form.component.scss'
+  styleUrls: ['./passengers-form.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule]
 })
-export class PassengersFormComponent {
+export class PassengersFormComponent implements OnInit {
+  passengerForm!: FormGroup;
+  isEditMode = false;
+  passengerId: string | null = null;
 
+  constructor(
+    private fb: FormBuilder,
+    private passengerService: PassengerService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.passengerForm = this.fb.group({
+      name: ['', Validators.required],
+      contact: ['', Validators.required]
+    });
+
+    this.passengerId = this.route.snapshot.paramMap.get('id');
+    if (this.passengerId) {
+      this.isEditMode = true;
+      this.passengerService.getPassengerById(this.passengerId).subscribe(passenger => {
+        this.passengerForm.patchValue(passenger);
+      });
+    }
+  }
+
+  onSubmit() {
+    if (this.passengerForm.invalid) return;
+
+    if (this.isEditMode && this.passengerId) {
+      this.passengerService.updatePassenger(this.passengerId, this.passengerForm.value).subscribe(() => {
+        this.router.navigate(['/passengers/list']);
+      });
+    } else {
+      this.passengerService.addPassenger(this.passengerForm.value).subscribe(() => {
+        this.router.navigate(['/passengers/list']);
+      });
+    }
+  }
 }

@@ -3,5 +3,5 @@ export interface Personnel {
      name: string;        
      role: string;        
      contact: string;     
-     flightNumber?: string; 
+     flight_number?: string; 
    }

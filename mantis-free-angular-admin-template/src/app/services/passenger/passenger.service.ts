@@ -8,7 +8,7 @@ import { Passenger } from 'src/app/models/passengers.model';
 })
 export class PassengerService {
 
-  private apiUrl = 'http://localhost:3000/api/personnel';
+  private apiUrl = 'http://localhost:3000/api/passengers';
 
   constructor(private http: HttpClient) {}
 
@@ -24,8 +24,14 @@ export class PassengerService {
     return this.http.get<Passenger[]>(this.apiUrl, { headers });
   }
 
+  getPassengerById(id: string): Observable<Passenger> {
+    const endpoint = `${this.apiUrl}/${id}`;
+    const headers = this.getAuthHeaders();
+    return this.http.get<Passenger>(endpoint, { headers });
+  }
+
   addPassenger(passenger: Passenger): Observable<Passenger> {
-    const endpoint = `${this.apiUrl}/create`;
+    const endpoint = `${this.apiUrl}`;
     const headers = this.getAuthHeaders();
     return this.http.post<Passenger>(endpoint, passenger, { headers });
   }

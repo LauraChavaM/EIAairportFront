@@ -7,11 +7,20 @@ export const PersonnelRoutes: Routes = [{
     path:'',
     children: [
         {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'list'
+        },
+        {
             path:'list',
             component: PersonnelListComponent
         },
         {
             path:'form',
+            component: PersonnelFormComponent
+        },
+        {
+            path: 'form/:id',
             component: PersonnelFormComponent
         }
     ], canActivate: [authGuard]
